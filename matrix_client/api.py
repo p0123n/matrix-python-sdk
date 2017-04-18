@@ -132,7 +132,7 @@ class MatrixHttpApi(object):
         """
         return self._send("POST", "/logout", api_path=MATRIX_V2_API_PATH)
 
-    def create_room(self, alias=None, is_public=False, invitees=()):
+    def create_room(self, alias=None, is_public=False, invitees=(), preset="public_chat"):
         """Perform /createRoom.
 
         Args:
@@ -147,6 +147,7 @@ class MatrixHttpApi(object):
             content["room_alias_name"] = alias
         if invitees:
             content["invite"] = invitees
+            content["preset"] = preset
         return self._send("POST", "/createRoom", content)
 
     def join_room(self, room_id_or_alias):
